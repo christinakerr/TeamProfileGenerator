@@ -57,8 +57,26 @@ async function getEmployee() {
         employee.officeNumber = office.officeNumber;
 
     } else if (employee.role === "Engineer"){
+        let engineerInput = inquirer.prompt([
+            {
+                type: "input",
+                message: "GitHub Profile: ",
+                name: "github"
+            }
+        ])
+        let githubLink = await engineerInput;
+        employee.github = githubLink.github;
 
     } else if (employee.role === "Intern"){
+        let internInput = inquirer.prompt([
+            {
+                type: "input",
+                message: "School: ",
+                name: "school"
+            }
+        ])
+        let university = await internInput;
+        employee.school = university.school;
 
     }
 }
