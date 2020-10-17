@@ -56,6 +56,9 @@ async function getEmployee() {
         let office = await managerInput;
         employee.officeNumber = office.officeNumber;
 
+        const manager = new Manager(employee.name, employee.id, employee.email, employee.officeNumber);
+        console.log(manager);
+
     } else if (employee.role === "Engineer"){
         let engineerInput = inquirer.prompt([
             {
