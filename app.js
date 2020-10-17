@@ -47,7 +47,6 @@ async function getEmployee() {
         }
     ])
     let employee = await input;
-    // console.log(employee);
 
     if (employee.role === "Manager"){
         let managerInput = inquirer.prompt([
@@ -85,6 +84,8 @@ async function getEmployee() {
         ])
         let university = await internInput;
         employee.school = university.school;
+
+        intern = new Intern(employee.name, employee.id, employee.email, employee.school);
 
     }
 }
