@@ -10,13 +10,15 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const anotherEmployee = true;
+let anotherEmployee = true;
+const yesOrNo = ["Yes", "No"];
 
 const employeeTypes = ["Manager", "Engineer", "Intern"]
 
 let manager;
 let engineer;
 let intern;
+let allEmployees = []
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -48,7 +50,7 @@ async function getEmployee() {
     ])
     let employee = await input;
 
-    if (employee.role === "Manager"){
+    if (employee.role === "Manager") {
         let managerInput = inquirer.prompt([
             {
                 type: "input",
@@ -61,7 +63,9 @@ async function getEmployee() {
 
         manager = new Manager(employee.name, employee.id, employee.email, employee.officeNumber);
 
-    } else if (employee.role === "Engineer"){
+        allEmployees.push(manager);
+
+    } else if (employee.role === "Engineer") {
         let engineerInput = inquirer.prompt([
             {
                 type: "input",
@@ -74,7 +78,9 @@ async function getEmployee() {
 
         engineer = new Engineer(employee.name, employee.id, employee.email, employee.github);
 
-    } else if (employee.role === "Intern"){
+        allEmployees.push(engineer);
+
+    } else if (employee.role === "Intern") {
         let internInput = inquirer.prompt([
             {
                 type: "input",
@@ -87,10 +93,41 @@ async function getEmployee() {
 
         intern = new Intern(employee.name, employee.id, employee.email, employee.school);
 
+        allEmployees.push(intern);
+
+    }
+
+    let another = inquirer.prompt(
+        {
+            type: "list",
+            message: "Would you like to add another employee? ",
+            name: "repeat",
+            choices: yesOrNo
+        }
+    )
+    let addEmployee = await another;
+    if (addEmployee.repeat === "Yes") {
+        anotherEmployee = true;
+    } else {
+        anotherEmployee = false;
     }
 }
 
-getEmployee();
+// const addEmployee = setInterval(() =>{
+//     if (!anotherEmployee){
+//         clearInterval(addEmployee);
+//     } else {
+
+//     }
+// })
+
+async function init() {
+    while (anotherEmployee) {
+        await getEmployee();
+    }
+}
+
+init();
 
 
 // After the user has input all employees desired, call the `render` function (required
