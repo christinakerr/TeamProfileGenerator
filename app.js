@@ -14,6 +14,10 @@ const anotherEmployee = true;
 
 const employeeTypes = ["Manager", "Engineer", "Intern"]
 
+let manager;
+let engineer;
+let intern;
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -56,8 +60,7 @@ async function getEmployee() {
         let office = await managerInput;
         employee.officeNumber = office.officeNumber;
 
-        const manager = new Manager(employee.name, employee.id, employee.email, employee.officeNumber);
-        console.log(manager);
+        manager = new Manager(employee.name, employee.id, employee.email, employee.officeNumber);
 
     } else if (employee.role === "Engineer"){
         let engineerInput = inquirer.prompt([
@@ -69,6 +72,8 @@ async function getEmployee() {
         ])
         let githubLink = await engineerInput;
         employee.github = githubLink.github;
+
+        engineer = new Engineer(employee.name, employee.id, employee.email, employee.github);
 
     } else if (employee.role === "Intern"){
         let internInput = inquirer.prompt([
