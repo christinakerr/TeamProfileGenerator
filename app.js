@@ -115,10 +115,28 @@ async function getEmployee() {
     }
 }
 
-async function init() { // Repeat until user says there are no more employees to add
-    while (anotherEmployee) {
+async function init() { 
+    while (anotherEmployee) { // Repeat until user says there are no more employees to add
         await getEmployee();
     }
+    writeToFile(render(allEmployees));
+}
+
+function writeToFile() {
+
+
+    // function writeToFile(fileName, data) {
+    //     if (!fs.existsSync(dir)) {
+    //         fs.mkdirSync(dir);
+    //     }
+    //     return fs.writeFile(fileName, data, function (err) {
+    //         if (err) {
+    //             console.log("Your README could not be created. Please try again.")
+    //         } else {
+    //             console.log("Success!")
+    //         }
+    //     })
+    // }
 }
 
 init();
