@@ -122,21 +122,15 @@ async function init() {
     writeToFile(render(allEmployees));
 }
 
-function writeToFile() {
+function writeToFile(htmlBlock) {
 
-
-    // function writeToFile(fileName, data) {
-    //     if (!fs.existsSync(dir)) {
-    //         fs.mkdirSync(dir);
-    //     }
-    //     return fs.writeFile(fileName, data, function (err) {
-    //         if (err) {
-    //             console.log("Your README could not be created. Please try again.")
-    //         } else {
-    //             console.log("Success!")
-    //         }
-    //     })
-    // }
+    return fs.writeFile(outputPath, htmlBlock, function(err) {
+        if (err) {
+            console.log("Your employee profile could not be created. Please try again.")
+        } else {
+            console.log("Employee profile successfully created at output/team.html")
+        }
+    })
 }
 
 init();
